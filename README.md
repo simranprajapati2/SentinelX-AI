@@ -113,7 +113,7 @@ SentinelX AI
 Clone the repository
 
 
-git clone https://github.com/your-username/SentinelX-AI.git
+git clone https://github.com/simranprajapati2/SentinelX-AI.git
 
 
 Go to project folder

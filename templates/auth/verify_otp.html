@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}
+OTP Verification
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-container">
+
+
+<div class="glass-card auth-card">
+
+    <h2>Email Verification</h2>
+
+    <p>
+        Enter the 6-digit OTP sent to your email.
+    </p>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('auth.verify_otp', user_id=user.id) }}">
+
+        <input
+            type="text"
+            name="otp"
+            placeholder="Enter OTP"
+            maxlength="6"
+            required
+            autofocus
+        >
+
+        <button type="submit">
+            Verify OTP
+        </button>
+
+    </form>
+
+    <br>
+
+    <p>
+        OTP expires in:
+        <span id="timer">
+            05:00
+        </span>
+    </p>
+
+    <a
+        href="{{ url_for('auth.resend_otp', user_id=user.id) }}"
+    >
+        Resend OTP
+    </a>
+
+</div>
+
+</div>
+
+<script>
+
+let time = 300;
+
+const timer = document.getElementById("timer");
+
+const countdown = setInterval(() => {
+
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    timer.innerHTML =
+        String(minutes).padStart(2, '0')
+        + ":"
+        +
+        String(seconds).padStart(2, '0');
+
+    time--;
+
+    if (time < 0) {
+        clearInterval(countdown);
+        timer.innerHTML = "Expired";
+    }
+
+}, 1000);
+
+</script>
+
+{% endblock %}

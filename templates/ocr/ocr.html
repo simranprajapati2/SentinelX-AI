@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="glass-card">
+
+        <!-- Back Button -->
+        <a href="{{ url_for('dashboard.home') }}"
+           class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+        <h2>OCR Scanner</h2>
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <input
+                type="file"
+                name="image_file"
+                accept=".png,.jpg,.jpeg"
+                required
+                class="file-input"
+            >
+
+            <br><br>
+
+            <button
+                type="submit"
+                class="scan-btn"
+            >
+                Extract Text
+            </button>
+
+        </form>
+
+        {% if result %}
+
+            <hr>
+
+            <div class="result-section">
+
+                <h3>
+                    Risk Score:
+                    <span class="risk-score">
+                        {{ result.risk_score }}%
+                    </span>
+                </h3>
+
+                <h4>
+                    Suspicious Keywords
+                </h4>
+
+                <ul class="keyword-list">
+                    {% for word in result.keywords %}
+                        <li>{{ word }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h4>
+                    Extracted Text
+                </h4>
+
+                <textarea
+                    rows="15"
+                    class="result-text"
+                    readonly
+                >{{ result.text }}</textarea>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="module-container">
+
+    <a href="{{ url_for('dashboard.home') }}"
+       class="back-btn">
+        ← Back to Dashboard
+    </a>
+
+    <h1>🛡️ Admin Dashboard</h1>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>Total Users</h3>
+            <h1>{{ total_users }}</h1>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Reports</h3>
+            <h1>{{ total_reports }}</h1>
+        </div>
+
+        <div class="stat-card">
+            <h3>Activity Logs</h3>
+            <h1>{{ total_logs }}</h1>
+        </div>
+
+    </div>
+
+    <div class="chart-card">
+        <h2>📊 Analytics Overview</h2>
+        <canvas id="adminChart"></canvas>
+    </div>
+
+    <div class="quick-grid">
+
+        <div class="quick-card">
+            <h3>👥 Manage Users</h3>
+            <a href="{{ url_for('admin.users') }}"
+               class="btn">
+               Open
+            </a>
+        </div>
+
+        <div class="quick-card">
+            <h3>📄 Reports</h3>
+            <a href="{{ url_for('admin.reports') }}"
+               class="btn">
+               Open
+            </a>
+        </div>
+
+        <div class="quick-card">
+            <h3>📝 Activity Logs</h3>
+            <a href="{{ url_for('admin.logs') }}"
+               class="btn">
+               Open
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const stats = JSON.parse('{{ {"users": total_users|default(0),"reports": total_reports|default(0),"logs": total_logs|default(0)} | tojson }}');
+
+window.totalUsers = stats.users;
+window.totalReports = stats.reports;
+window.totalLogs = stats.logs;
+</script>
+
+<script src="{{ url_for('static',
+filename='js/admin.js') }}"></script>
+
+{% endblock %}

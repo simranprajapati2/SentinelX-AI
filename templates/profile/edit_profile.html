@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div
+                class="card shadow-lg border-0"
+                style="
+                    border-radius:25px;
+                    overflow:hidden;
+                "
+            >
+
+                <!-- Cover Photo -->
+                <div
+                    style="
+                        height:220px;
+                        background:
+                        linear-gradient(
+                            135deg,
+                            #1e3c72,
+                            #2a5298
+                        );
+                    "
+                ></div>
+
+                <!-- Profile Image -->
+                <div
+                    class="text-center"
+                    style="margin-top:-90px;"
+                >
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename='uploads/profile/' +
+                            current_user.profile_image
+                        ) }}"
+                        width="180"
+                        height="180"
+                        id="previewImage"
+                        style="
+                            border-radius:50%;
+                            object-fit:cover;
+                            border:6px solid white;
+                            box-shadow:
+                            0 5px 20px rgba(0,0,0,.3);
+                        "
+                    >
+
+                </div>
+
+                <div class="card-body p-5">
+
+                    <h2
+                        class="text-center mb-4"
+                    >
+                        Edit Profile
+                    </h2>
+
+                    <form
+                        method="POST"
+                        enctype="multipart/form-data"
+                    >
+
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-4">
+                            <label class="fw-bold">
+                                Full Name
+                            </label>
+
+                            {{ form.full_name(
+                                class="form-control form-control-lg"
+                            ) }}
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="fw-bold">
+                                Phone Number
+                            </label>
+
+                            {{ form.phone(
+                                class="form-control form-control-lg"
+                            ) }}
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="fw-bold">
+                                Bio
+                            </label>
+
+                            {{ form.bio(
+                                class="form-control",
+                                rows="5"
+                            ) }}
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="fw-bold">
+                                Change Profile Image
+                            </label>
+
+                            <input
+                                type="file"
+                                name="profile_image"
+                                class="form-control"
+                                accept="image/*"
+                                onchange="previewFile(event)"
+                            >
+
+                        </div>
+
+                        <div class="text-center">
+
+                            {{ form.submit(
+                                class="btn btn-primary btn-lg px-5"
+                            ) }}
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function previewFile(event)
+{
+    const image =
+        document.getElementById(
+            "previewImage"
+        );
+
+    image.src =
+        URL.createObjectURL(
+            event.target.files[0]
+        );
+}
+</script>
+
+{% endblock %}

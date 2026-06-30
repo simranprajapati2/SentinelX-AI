@@ -1,0 +1,198 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/dashboard.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>SentinelX AI</h2>
+            <p>Detect. Verify. Protect.</p>
+        </div>
+
+        <ul class="menu">
+      <li><a href="{{ url_for('dashboard.home') }}">Dashboard</a></li>
+     <li><a href="/fraud">Job Fraud Detection</a></li>
+     <li><a href="/pdf">PDF Analyzer</a></li>
+     <li><a href="/ocr">OCR Module</a></li>
+     <li><a href="/reports">Reports</a></li>
+     <li><a href="/notifications">Notifications</a></li>
+     <li><a href="{{ url_for('website.verify') }}">Website Verification</a></li>
+
+     <li>
+        <a href="{{ url_for('profile.view_profile') }}">
+            Profile
+        </a>
+     </li>
+
+     <li>
+        <a href="{{ url_for('database.dashboard') }}">
+            Database Backup
+        </a>
+     </li>
+
+     <li>
+        <a href="{{ url_for('report.history') }}">
+            Report History
+        </a>
+     </li>
+
+     {% if current_user.is_admin %}
+     <li>
+        <a href="{{ url_for('admin.dashboard') }}">
+            Admin Panel
+        </a>
+      </li>
+    {% endif %}
+    <li><a href="{{ url_for('logs.activity_logs') }}">
+        Activity Logs
+    </a></li>
+
+    <li>
+        <a href="{{ url_for('auth.logout') }}">
+            Logout
+        </a>
+    </li>
+</ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <h1>Dashboard</h1>
+
+            <div class="profile">
+                Welcome,
+                {% if current_user.is_authenticated %}
+                    {{ current_user.username }}
+                {% else %}
+                    User
+                {% endif %}
+            </div>
+        </nav>
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <h3>Analyses</h3>
+                <p>125</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Threats Detected</h3>
+                <p>17</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Reports Generated</h3>
+                <p>42</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Notifications</h3>
+                <p>8</p>
+            </div>
+
+        </section>
+
+        <!-- Features -->
+        <section class="feature-grid">
+
+            <div class="feature-card">
+                <h2>Job Fraud Detection</h2>
+                <p>Analyze suspicious job postings.</p>
+                <a href="/fraud" class="feature-btn">
+                    Open
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <h2>PDF Analyzer</h2>
+                <p>Scan and verify PDF documents.</p>
+                <a href="/pdf" class="feature-btn">
+                    Open
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <h2>OCR Module</h2>
+                <p>Extract text from images.</p>
+                <a href="/ocr" class="feature-btn">
+                    Open
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <h2>Website Verification</h2>
+                <p>Check website legitimacy and security.</p>
+                <a
+                    href="{{ url_for('website.verify') }}"
+                    class="feature-btn"
+                >
+                    Open
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <h2>Reports</h2>
+                <p>View analysis reports and history.</p>
+                <a href="/reports" class="feature-btn">
+                    Open
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <h2>Notifications</h2>
+                <p>Manage alerts and notifications.</p>
+                <a href="/notifications" class="feature-btn">
+                    Open
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <h2>Database Backup</h2>
+                <p>
+                    Create, download and restore
+                    database backups securely.
+                </p>
+
+                <a
+                    href="{{ url_for('database.dashboard') }}"
+                    class="feature-btn"
+                >
+                    Open Backup Manager
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script
+    src="{{ url_for('static', filename='js/dashboard.js') }}"
+></script>
+{% endblock %}
+

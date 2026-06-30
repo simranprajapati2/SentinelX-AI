@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            SentinelX AI
+        {% endblock %}
+    </title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    <!-- Notification CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/notifications.css') }}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="flash-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- Notification Icon -->
+<a href="{{ url_for('notification.index') }}"
+   class="notification-link">
+
+    🔔
+
+    <span
+        id="notification-badge"
+        class="notification-badge">
+    </span>
+
+</a>
+
+<!-- PAGE CONTENT -->
+<div class="app-wrapper">
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+<script src="{{ url_for('static',
+filename='js/notifications.js') }}"></script>
+
+{% block js %}
+{% endblock %}
+
+</body>
+</html>

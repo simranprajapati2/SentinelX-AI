@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+Reports
+{% endblock %}
+
+{% block content %}
+
+<div class="module-container">
+
+    <a href="{{ url_for('dashboard.home') }}"
+       class="back-btn">
+        ← Back to Dashboard
+    </a>
+
+    <div class="module-card">
+
+        <h1>📄 Reports</h1>
+
+        {% if reports %}
+
+        <table class="report-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Report Name</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for report in reports %}
+            <tr>
+
+                <td>{{ report.id }}</td>
+
+                <td>
+                    {{ report.report_name }}
+                </td>
+
+                <td>
+                    {{ report.created_at }}
+                </td>
+
+                <td>
+
+                    <a
+                        href="{{ url_for('report.download', report_id=report.id) }}"
+                        class="btn btn-success">
+                        Download
+                    </a>
+
+                    <a
+                        href="{{ url_for('report.delete', report_id=report.id) }}"
+                        class="btn btn-danger">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p>No reports found.</p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+Report History
+{% endblock %}
+
+{% block content %}
+
+<div class="module-container">
+
+    <a href="{{ url_for('dashboard.home') }}"
+       class="back-btn">
+        ← Back to Dashboard
+    </a>
+
+    <div class="module-card">
+
+        <h2>📜 Report History</h2>
+
+        {% if reports %}
+
+        <table class="report-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Report Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for report in reports %}
+            <tr>
+
+                <td>{{ report.id }}</td>
+
+                <td>
+                    {{ report.report_name }}
+                </td>
+
+                <td>
+                    {{ report.created_at }}
+                </td>
+
+                <td>
+                    <span style="color:#22c55e;">
+                        Completed
+                    </span>
+                </td>
+
+                <td>
+
+                    <a
+                        href="{{ url_for('report.download', report_id=report.id) }}"
+                        class="btn btn-success">
+                        Download
+                    </a>
+
+                </td>
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p>No reports available.</p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

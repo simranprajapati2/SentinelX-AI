@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="profile-card">
+         <a href="{{ url_for('dashboard.home') }}"
+   class="back-btn">
+    <span>←</span> Back to Dashboard
+</a>
+
+        <div class="cover-photo"></div>
+
+        <div class="profile-content">
+           
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='uploads/profile/' + user.profile_image
+                ) }}"
+                class="profile-image"
+                alt="Profile Image"
+            >
+
+            <h1>{{ user.full_name }}</h1>
+
+            <h5>@{{ user.username }}</h5>
+
+            <p>📧 {{ user.email }}</p>
+
+            {% if user.phone %}
+                <p>📞 {{ user.phone }}</p>
+            {% endif %}
+
+            <div class="about-box">
+                <h3>About Me</h3>
+
+                <p>
+                    {{ user.bio or "No bio added yet." }}
+                </p>
+            </div>
+
+            <a
+                href="{{ url_for('profile.edit_profile') }}"
+                class="btn btn-info edit-btn"
+            >
+                Edit Profile
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

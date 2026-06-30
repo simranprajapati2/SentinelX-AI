@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <!-- Top Back Button -->
+    <div class="top-actions">
+        <a href="{{ url_for('dashboard.home') }}" class="back-btn">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Main Card -->
+    <div class="glass-card db-card">
+
+        <h1 class="db-title">Database Management</h1>
+
+        <div class="db-buttons">
+
+            <a href="/database/backup" class="db-btn backup-btn">
+                💾 Backup Database
+            </a>
+
+            <a href="/database/stats" class="db-btn stats-btn">
+                📊 Database Statistics
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

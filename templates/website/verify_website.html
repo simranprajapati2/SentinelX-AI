@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="module-container">
+
+    <a
+        href="{{ url_for('dashboard.home') }}"
+        class="back-btn">
+        ← Back to Dashboard
+    </a>
+
+    <div class="module-card">
+
+        <h2>
+            🌐 Website Verification
+        </h2>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="website_url"
+                placeholder="https://example.com"
+                class="form-control"
+                required
+            >
+
+            <br>
+
+            <button
+                type="submit"
+                class="btn">
+                Verify Website
+            </button>
+
+        </form>
+
+        {% if result %}
+
+        <hr>
+
+        <div class="glass-card" style="margin-top:20px;">
+
+            <h3>
+                Risk Score:
+                {{ result.risk_score }}%
+            </h3>
+
+            <h4>
+                Warnings
+            </h4>
+
+            <ul>
+                {% for warning in result.warnings %}
+                    <li>{{ warning }}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

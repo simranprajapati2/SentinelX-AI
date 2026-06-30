@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="module-container">
+
+    <a
+        href="{{ url_for('dashboard.home') }}"
+        class="back-btn">
+        ← Back to Dashboard
+    </a>
+
+    <div class="module-card">
+
+        <h2>
+            🔐 Admin Verification
+        </h2>
+
+        <p>
+            Enter the OTP sent to your email.
+        </p>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="otp"
+                placeholder="Enter 6 Digit OTP"
+                maxlength="6"
+                required
+            >
+
+            <button
+                type="submit"
+                class="btn">
+                Verify OTP
+            </button>
+
+        </form>
+
+        <br>
+
+        <a
+            href="{{ url_for('admin.resend_admin_otp') }}"
+            class="btn btn-success"
+        >
+            🔄 Resend OTP
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

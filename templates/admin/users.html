@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>All Users</h1>
+
+<table class="admin-table">
+
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th>Actions</th>
+</tr>
+
+{% for user in users %}
+
+<tr>
+
+    <td>{{ user.id }}</td>
+    <td>{{ user.full_name }}</td>
+    <td>{{ user.email }}</td>
+
+    <td>
+        {% if user.is_locked %}
+    Locked
+{% elif user.is_blocked %}
+    Blocked
+{% else %}
+    Active
+{% endif %}
+
+    </td>
+   <td>
+
+{% if user.is_locked %}
+
+    <a
+        href="{{ url_for('admin.unlock_user', user_id=user.id) }}"
+        class="btn-warning"
+    >
+        Unlock
+    </a>
+
+{% elif user.is_blocked %}
+
+    <a
+        href="{{ url_for('admin.unblock_user', user_id=user.id) }}"
+        class="btn-success"
+    >
+        Unblock
+    </a>
+
+{% else %}
+
+    <a
+        href="{{ url_for('admin.block_user', user_id=user.id) }}"
+        class="btn-danger"
+    >
+        Block
+    </a>
+
+{% endif %}
+
+<a
+    href="{{ url_for('admin.delete_user', user_id=user.id) }}"
+    class="btn-delete"
+    onclick="return confirm('Delete this user permanently?')"
+>
+    Delete
+</a>
+
+</td>
+    
+       
+
+</tr>
+
+{% endfor %}
+
+
+</table>
+
+{% endblock %}

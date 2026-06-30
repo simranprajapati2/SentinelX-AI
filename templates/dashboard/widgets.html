@@ -1,0 +1,35 @@
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <h3>{{ stats.reports }}</h3>
+        <p>Reports Generated</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>{{ stats.threats }}</h3>
+        <p>Threats Detected</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>{{ stats.safe_sites }}</h3>
+        <p>Safe Websites</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>{{ stats.notifications }}</h3>
+        <p>Notifications</p>
+    </div>
+
+</div>
+
+<div class="activity-card">
+
+    <h3>Recent Activity</h3>
+
+    <ul>
+        {% for item in activities %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+</div>

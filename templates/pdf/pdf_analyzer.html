@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="top-actions">
+        <a href="{{ url_for('dashboard.home') }}"
+           class="back-btn">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+    <div class="glass-card upload-card">
+
+        <h2>📄 PDF Analyzer</h2>
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <div class="file-upload">
+
+                <input
+                    type="file"
+                    name="pdf_file"
+                    accept=".pdf"
+                    required
+                >
+
+            </div>
+
+            <br>
+
+            <button
+                type="submit"
+                class="btn-primary"
+            >
+                Analyze PDF
+            </button>
+
+        </form>
+
+        {% if result %}
+
+        <div class="result-box">
+
+            <h3>
+                ⚠ Risk Score:
+                {{ result.risk_score }}%
+            </h3>
+
+            <hr>
+
+            <h4>
+                Suspicious Keywords
+            </h4>
+
+            {% if result.keywords %}
+
+            <ul class="keyword-list">
+
+                {% for word in result.keywords %}
+                <li>{{ word }}</li>
+                {% endfor %}
+
+            </ul>
+
+            {% else %}
+
+            <p class="safe">
+                No suspicious keywords found.
+            </p>
+
+            {% endif %}
+
+            <hr>
+
+            <h4>
+                Extracted Text
+            </h4>
+
+            <textarea
+                class="result-text"
+                rows="15"
+                readonly
+            >{{ result.text }}</textarea>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

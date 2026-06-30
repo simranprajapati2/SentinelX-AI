@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="top-actions">
+        <a href="{{ url_for('dashboard.home') }}" class="back-btn">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+    <div class="glass-card">
+
+        <h2>🔍 Job Fraud Detection AI</h2>
+
+        <form method="POST">
+
+            <textarea
+                name="job_text"
+                class="form-control"
+                rows="10"
+                placeholder="Paste job description here..."
+                required></textarea>
+
+            <br>
+
+            <button class="btn-primary">
+                Analyze
+            </button>
+
+        </form>
+
+        {% if result %}
+
+        <div class="result-box">
+
+            <h3>
+                Result:
+                <span class="{% if result.prediction == 'Fraud' %}fraud{% else %}safe{% endif %}">
+                    {{ result.prediction }}
+                </span>
+            </h3>
+
+            <h4>
+                Risk Score: {{ result.fraud_score }}%
+            </h4>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

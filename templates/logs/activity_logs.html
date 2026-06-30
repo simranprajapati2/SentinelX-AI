@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="top-actions">
+        <a href="{{ url_for('dashboard.home') }}" class="back-btn">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+<h1>Activity Logs</h1>
+
+<table class="admin-table">
+
+<tr>
+    <th>Action</th>
+    <th>Date</th>
+</tr>
+
+{% for log in activities %}
+
+<tr>
+    <td>{{ log.activity }}</td>
+    <td>{{ log.created_at }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

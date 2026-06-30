@@ -1,0 +1,27 @@
+.page-container{
+    padding:40px;
+}
+
+.glass-card{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:40px;
+}
+
+textarea,
+input{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:12px;
+}
+
+button{
+    margin-top:20px;
+    padding:15px 30px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+}

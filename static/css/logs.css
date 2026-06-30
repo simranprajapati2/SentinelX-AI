@@ -1,0 +1,131 @@
+.page-container{
+    min-height:100vh;
+    padding:30px;
+    background:#050b1a;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* Top */
+.top-actions{
+    width:100%;
+    max-width:1100px;
+    margin-bottom:15px;
+}
+
+.back-btn{
+    display:inline-flex;
+    padding:12px 22px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:600;
+    color:#fff;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    transform:translateY(-3px);
+}
+
+/* Card */
+.glass-card.logs-card{
+    width:100%;
+    max-width:1100px;
+    background:rgba(8,20,47,0.92);
+    border-radius:25px;
+    padding:30px;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+/* Title */
+.page-title{
+    text-align:center;
+    color:white;
+    margin-bottom:20px;
+}
+
+/* Filters */
+.log-filters{
+    display:flex;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.search-box,
+.filter-box{
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    width:100%;
+}
+
+/* Table */
+.custom-table{
+    width:100%;
+    border-collapse:collapse;
+    color:white;
+}
+
+.custom-table th,
+.custom-table td{
+    padding:12px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.custom-table tbody tr:hover{
+    background:rgba(255,255,255,0.05);
+}
+
+/* Badges */
+.badge{
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.badge.login{
+    background:#22c55e;
+    color:#000;
+}
+
+.badge.logout{
+    background:#f59e0b;
+    color:#000;
+}
+
+.badge.delete{
+    background:#ef4444;
+    color:#fff;
+}
+
+.badge.other{
+    background:#64748b;
+    color:#fff;
+}
+
+/* Pagination */
+.pagination{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+}
+
+.page-btn{
+    padding:8px 14px;
+    border-radius:10px;
+    text-decoration:none;
+    background:rgba(255,255,255,0.08);
+    color:white;
+}
+
+.page-btn.active{
+    background:#00c6ff;
+}
